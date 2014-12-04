@@ -1,0 +1,110 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+	
+	<link href="../../../../../concordion.css" rel="stylesheet" type="text/css" />
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title>Cálculo del pronóstico del tiempo para una semana</title>
+	</head>
+
+	<body>
+		<h1>Cálculo del pronóstico del tiempo para la siguiente semana</h1>
+	
+		<p>
+		  El cálculo del pronóstico del tiempo para una semana se realiza a partir de la presión y la humedad
+		  relativa del día actual. La presión se expresa en <a href="http://es.wikipedia.org/wiki/Presi%C3%B3n">atmósferas</a> 
+		  mientras que la <a href="http://es.wikipedia.org/wiki/Humedad_del_aire">humedad relativa</a> se expresa haciendo uso de un tanto por cierto 
+		</p>
+		<p>
+		  Por ejemplo podríamos calcular el pronósito a partir de los datos de 1.5 atmósferas de presión y una humedad relativa del 0.60 (lo que equivale a un 
+		  60% de humedad relativa)
+		</p>
+		<p>
+		  El cálculo del pronóstico se realizará de la siguiente manera:
+		</p>
+		<ul>
+			<li>Si la presión es superior o igual a 1.7 atmósferas y la humedad relativa es superior o igual a 0.80 el pronóstico  
+			sera lluvia</li>
+			<li>Si la presión es inferior a 1.7 atmósferas y la humedad relativa es superior o igual a 0.80 el pronóstico será
+			nublado</li>
+			<li>Si la presión es inferior a 1.7 atmósferas y la humedad relativa es inferior a 0.80 el pronóstico será 
+			soleado</li>
+			<li>En cualquier otro caso no se puede calcular el pronóstico con la suficiente fiabilidad</li>
+		</ul>
+		
+		<div class="example">
+			
+			<h3>Ejemplo del algoritmo de cálculo del pronóstico con diferentes valores para la humedad relativa y la presión</h3>
+			
+			<p>
+				En este ejemplo se puede observar como se comporta el algoritmo de cálculo del pronóstico cuando se introducen distintos valores para la 
+				humedad relativa y la presión atmosférica. 
+			</p>
+			
+			<p>Dada las siguientes presión atmosféricas y humedades relativas, cuando se calcula el pronóstico usando el algoritmo descrito en esta 
+			especificación se obtienen los siguiente resultados</p>
+			
+			<table concordion:execute ="#forecast = getForecast(#humidity,#pressure)">
+				
+				<tr>
+					<th concordion:set = "#pressure">Presión</th>
+					<th concordion:set ="#humidity">Humedad</th>
+					<th concordion:assertEquals = "#forecast">Resultado</th>
+					<th>Comentarios</th>	
+				</tr>
+				
+				<tr>
+					<td>1.8</td>
+					<td>0.82</td>
+					<td>Lluvia</td>
+					<td>Comentario</td>
+				</tr>
+				
+				<tr>
+					<td>1.6</td>
+					<td>0.90</td>
+					<td>Nublado</td>
+					<td>Comentario</td>
+				</tr>
+				
+				<tr>
+					<td>1.6</td>
+					<td>0.70</td>
+					<td>Soleado</td>
+					<td>Comentario</td>
+				</tr>
+				
+				<tr>
+					<td>1.8</td>
+					<td>0.70</td>
+					<td>No se puede calcular</td>
+					<td>Comentario</td>
+				</tr>
+				
+				<tr>
+					<td>1.6</td>
+					<td>0.75</td>
+					<td>Soleado</td>
+					<td>Comentario</td>
+				</tr>
+				
+				<tr>
+					<td>1.6</td>
+					<td>0.70</td>
+					<td>Soleado</td>
+					<td>Comentario</td>
+				</tr>
+				
+			</table>
+		
+		</div>
+
+		<h2>Más detalles</h2>
+
+		<ul>
+			<li><a href="http://fccr.ucsd.edu/pubs/ccb08.pdf">Otros algoritmos de estimación del tiempo</a></li>		
+		</ul>
+
+	</body>
+
+</html>
